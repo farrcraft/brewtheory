@@ -19,7 +19,7 @@ const configuration: webpack.Configuration = {
 
   target: 'electron-renderer',
 
-  entry: path.join(webpackPaths.srcMainPath, 'preload.ts'),
+  entry: path.join(webpackPaths.srcPreloadPath, 'preload.ts'),
 
   output: {
     path: webpackPaths.distDevPath,
