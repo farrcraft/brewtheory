@@ -39,6 +39,12 @@ func main() {
 				Usage:       "log file name",
 				Destination: &logFile,
 			},
+			&cli.StringFlag{
+				Name:        "loglevel",
+				Value:       "DEBUG",
+				Usage:       "log level",
+				Destination: &logLevel,
+			},
 		},
 		Action: func(cCtx *cli.Context) error {
 			backend := electron.NewElectron(logLevel, logFile)
