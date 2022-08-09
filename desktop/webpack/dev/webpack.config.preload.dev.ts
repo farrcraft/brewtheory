@@ -35,6 +35,8 @@ const configuration: webpack.Configuration = {
       analyzerMode: process.env.ANALYZE === 'true' ? 'server' : 'disabled',
     }),
 
+    new webpack.NoEmitOnErrorsPlugin(),
+
     /**
      * Create global constants which can be configured at compile time.
      *
