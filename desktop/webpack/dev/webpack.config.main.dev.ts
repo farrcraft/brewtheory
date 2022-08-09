@@ -7,6 +7,7 @@ import webpack from 'webpack';
 import { merge } from 'webpack-merge';
 import TerserPlugin from 'terser-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import CopyPlugin from 'copy-webpack-plugin';
 import baseConfig from '../webpack.config.base';
 import webpackPaths from '../webpack.paths';
 import checkNodeEnv from '../../scripts/check-node-env';
@@ -40,6 +41,19 @@ const configuration: webpack.Configuration = {
   plugins: [
     new BundleAnalyzerPlugin({
       analyzerMode: process.env.ANALYZE === 'true' ? 'server' : 'disabled',
+    }),
+
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.join(webpackPaths.srcPath, 'app.html'),
+          to: path.join(webpackPaths.distDevPath, 'app.html'),
+        },
+        {
+          from: path.join(webpackPaths.srcPath, 'app.js'),
+          to: path.join(webpackPaths.distDevPath, 'app.js'),
+        },
+      ],
     }),
 
     /**
