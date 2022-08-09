@@ -18,7 +18,9 @@ node_modules
 # OSX
 .DS_Store
 
+release/app/dev
 release/app/dist
+release/app/prod
 release/build
 .erb/dll
 
