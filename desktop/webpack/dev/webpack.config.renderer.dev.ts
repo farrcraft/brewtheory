@@ -19,7 +19,7 @@ const configuration: webpack.Configuration = {
   target: 'web',
 
   entry: {
-    renderer: path.join(webpackPaths.srcRendererPath, 'index.tsx'),
+    renderer: path.join(webpackPaths.srcRendererPath, 'renderer.tsx'),
   },
 
   output: {
