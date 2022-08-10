@@ -30,6 +30,7 @@ import (
 func main() {
 	var logLevel string
 	var logFile string
+	var listenerAddress string
 
 	app := &cli.App{
 		Flags: []cli.Flag{
@@ -45,11 +46,17 @@ func main() {
 				Usage:       "log level",
 				Destination: &logLevel,
 			},
+			&cli.StringFlag{
+				Name:        "listen",
+				Value:       "localhost:53017",
+				Usage:       "service listener address",
+				Destination: &listenerAddress,
+			},
 		},
 		Action: func(cCtx *cli.Context) error {
-			backend := electron.NewElectron(logLevel, logFile)
-			backend.Logger.Debug("Starting Service...")
-			backend.Run()
+			service := electron.NewElectron(logLevel, logFile)
+			service.Logger.Debug("Starting Service...")
+			service.Run(listenerAddress)
 			return nil
 		},
 	}

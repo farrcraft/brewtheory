@@ -1,0 +1,53 @@
+/*
+BrewTheory
+Copyright (C) 2022  Joshua Farr
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+syntax = "proto3";
+
+package brewtheory;
+
+option go_package = "internal/electron/proto";
+
+import public "internal/electron/proto/common.proto";
+
+// N.B. - In the go bindings, case of the generated methods matches these proto definitions
+// However, in the JS bindings, method names start lowercase (so it's, e.g. "openMasterDb" instead of "OpenMasterDb")
+// If you try to invoke the latter, the client will just hang indefinitely.
+// Another gotcha with the JS bindings is getter/setter method names -
+// The entire fieldname is lowercase except for the first character in the method name.
+// E.g., if the message field is named "windowWidth", the getter/setter pair is "getWindowwidth"/"setWindowwidth".
+// Trying to call, e.g. "getWindowWidth" will cause the client to hang as with incorrect service method names.
+
+message EmptyRequest {
+	RequestHeader header = 1;
+}
+
+message EmptyResponse {
+	ResponseHeader header = 1;
+}
+
+// a generic RPC request message containing a common UUID string
+message IdRequest {
+	RequestHeader header = 1;
+	string id = 2;
+}
+
+// a generic RPC response message containing a common UUID string
+message IdResponse {
+	ResponseHeader header = 1;
+	string id = 2;
+}

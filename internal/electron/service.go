@@ -22,12 +22,15 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/farrcraft/brewtheory/internal/electron/rpc"
+
 	"github.com/sirupsen/logrus"
 )
 
 // Electron is the main service type
 type Electron struct {
 	Logger   *logrus.Logger
+	RPC      *rpc.Server
 	Status   chan string
 	Shutdown chan bool
 }
@@ -60,13 +63,17 @@ func NewElectron(logLevel string, logFile string) *Electron {
 }
 
 // Run is called when the application is started
-func (backend *Electron) Run() {
+func (service *Electron) Run(servicePort string) {
+	service.RPC = rpc.NewServer(service.Logger, service.Status, service.Shutdown)
+	//service.RPC.RegisterHandlers(handler.Handlers())
+	go service.RPC.Start(servicePort)
 	for {
 		select {
-		case msg := <-backend.Status:
+		case msg := <-service.Status:
 			fmt.Println(msg)
-		case ok := <-backend.Shutdown:
-			backend.Logger.Info("Shutting down service...")
+		case ok := <-service.Shutdown:
+			service.Logger.Info("Shutting down service...")
+			service.RPC.Stop()
 			if !ok {
 				os.Exit(1)
 			} else {
