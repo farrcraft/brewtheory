@@ -1,5 +1,7 @@
 import { app } from 'electron';
-import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+import installExtension, {
+  REACT_DEVELOPER_TOOLS,
+} from 'electron-devtools-installer';
 import Logger from '../core/Logger';
 import Backend from './Backend';
 import Window from './Window';
