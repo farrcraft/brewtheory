@@ -30,7 +30,10 @@ import (
 	"math/big"
 	"net"
 	"os"
+	"path/filepath"
 	"time"
+
+	"github.com/shibukawa/configdir"
 )
 
 func (rpc *Server) createCertificate() bool {
@@ -54,7 +57,7 @@ func (rpc *Server) createCertificate() bool {
 
 	addIP := func(ipAddr net.IP) {
 		for _, ip := range ipAddresses {
-			if bytes.Equal(ip, ipAddr) {
+			if net.IP.Equal(ip, ipAddr) {
 				return
 			}
 		}
@@ -130,6 +133,16 @@ func (rpc *Server) createCertificate() bool {
 	rpc.Certificate, err = tls.X509KeyPair(certBuf.Bytes(), keyBuf.Bytes())
 	if err != nil {
 		rpc.Logger.Warn("Error converting certificate - ", err)
+		return false
+	}
+
+	configDirs := configdir.New("farrcraft", "brewtheory")
+	folders := configDirs.QueryFolders(configdir.Global)
+	certPath := filepath.Join(folders[0].Path, "certificate")
+	rpc.Logger.Debug("Wrote certificate to: ", certPath)
+	err = os.WriteFile(certPath, certBuf.Bytes(), 0600)
+	if err != nil {
+		rpc.Logger.Warn("Error writing certificate - ", err)
 		return false
 	}
 

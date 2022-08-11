@@ -21,14 +21,14 @@ package rpc
 import (
 	"crypto/tls"
 	"encoding/base64"
-	"io/ioutil"
+	"io"
 	"log"
 	"net"
 	"net/http"
 	"strconv"
 
-	"github.com/golang/protobuf/proto"
 	"github.com/sirupsen/logrus"
+	"google.golang.org/protobuf/proto"
 )
 
 // Handler is an RPC message handler
@@ -157,7 +157,7 @@ func (rpc *Server) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	body, err := ioutil.ReadAll(req.Body)
+	body, err := io.ReadAll(req.Body)
 	if err != nil {
 		rpc.Logger.Warn("Error reading request body - ", err)
 		return
