@@ -22,6 +22,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/farrcraft/brewtheory/internal/electron/handler"
 	"github.com/farrcraft/brewtheory/internal/electron/rpc"
 
 	"github.com/sirupsen/logrus"
@@ -65,7 +66,7 @@ func NewElectron(logLevel string, logFile string) *Electron {
 // Run is called when the application is started
 func (service *Electron) Run(servicePort string) {
 	service.RPC = rpc.NewServer(service.Logger, service.Status, service.Shutdown)
-	//service.RPC.RegisterHandlers(handler.Handlers())
+	service.RPC.RegisterHandlers(handler.Handlers())
 	go service.RPC.Start(servicePort)
 	for {
 		select {
