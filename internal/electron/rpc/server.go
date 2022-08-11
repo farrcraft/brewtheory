@@ -239,12 +239,14 @@ func (rpc *Server) FindHandler(requestMethod string) Handler {
 func (rpc *Server) Start(port string) bool {
 	ok := rpc.createCertificate()
 	if !ok {
+		rpc.Shutdown <- false
 		return false
 	}
 
 	conn, err := net.Listen("tcp", port)
 	if err != nil {
 		rpc.Logger.Warn("Listen error - ", err)
+		rpc.Shutdown <- false
 		return false
 	}
 	tlsConfig := &tls.Config{
