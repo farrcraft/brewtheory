@@ -8,9 +8,7 @@
     "typescript",
     "ts",
     "sass",
-    "webpack",
-    "hot",
-    "reload"
+    "webpack"
   ],
   "homepage": "https://github.com/farrcraft/brewtheory#readme",
   "bugs": {
@@ -89,7 +87,7 @@
       "\\.(css|less|sass|scss)$": "identity-obj-proxy"
     },
     "setupFiles": [
-      "./.erb/scripts/check-build-exists.ts"
+      "./scripts/check-build-exists.ts"
     ],
     "testEnvironment": "jsdom",
     "testEnvironmentOptions": {
@@ -109,6 +107,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.3.0",
+    "tweetnacl": "1.0.3",
     "winston": "3.8.1"
   },
   "devDependencies": {
@@ -177,13 +176,13 @@
     "productName": "BrewTheory",
     "appId": "org.erb.BrewTheory",
     "asar": true,
-    "asarUnpack": "**\\*.{node,dll}",
+    "asarUnpack": "**\\*.{node}",
     "files": [
       "dist",
       "node_modules",
       "package.json"
     ],
-    "afterSign": ".erb/scripts/notarize.js",
+    "afterSign": "./scripts/notarize.js",
     "mac": {
       "target": {
         "target": "default",
