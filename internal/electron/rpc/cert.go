@@ -27,6 +27,7 @@ import (
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/pem"
+	"errors"
 	"math/big"
 	"net"
 	"os"
@@ -136,8 +137,16 @@ func (rpc *Server) createCertificate() bool {
 		return false
 	}
 
-	configDirs := configdir.New("farrcraft", "brewtheory")
+	configDirs := configdir.New("farrcraft", "BrewTheory")
 	folders := configDirs.QueryFolders(configdir.Global)
+	if _, err := os.Stat(folders[0].Path); errors.Is(err, os.ErrNotExist) {
+		rpc.Logger.Debug("Creating missing config directory - ", folders[0].Path)
+		err := os.Mkdir(folders[0].Path, os.ModePerm)
+		if err != nil {
+			rpc.Logger.Error("Error creating config directory - ", err)
+			return false
+		}
+	}
 	certPath := filepath.Join(folders[0].Path, "certificate")
 	rpc.Logger.Debug("Wrote certificate to: ", certPath)
 	err = os.WriteFile(certPath, certBuf.Bytes(), 0600)
