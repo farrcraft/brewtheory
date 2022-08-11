@@ -141,7 +141,7 @@ func (rpc *Server) createCertificate() bool {
 	folders := configDirs.QueryFolders(configdir.Global)
 	if _, err := os.Stat(folders[0].Path); errors.Is(err, os.ErrNotExist) {
 		rpc.Logger.Debug("Creating missing config directory - ", folders[0].Path)
-		err := os.Mkdir(folders[0].Path, os.ModePerm)
+		err := os.MkdirAll(folders[0].Path, os.ModePerm)
 		if err != nil {
 			rpc.Logger.Error("Error creating config directory - ", err)
 			return false
