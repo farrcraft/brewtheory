@@ -137,7 +137,7 @@ func (rpc *Server) createCertificate() bool {
 		return false
 	}
 
-	configDirs := configdir.New("farrcraft", "BrewTheory")
+	configDirs := configdir.New("", "BrewTheory")
 	folders := configDirs.QueryFolders(configdir.Global)
 	if _, err := os.Stat(folders[0].Path); errors.Is(err, os.ErrNotExist) {
 		rpc.Logger.Debug("Creating missing config directory - ", folders[0].Path)

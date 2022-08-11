@@ -1,4 +1,6 @@
 {
+  "name": "brewtheory",
+  "productName": "BrewTheory",
   "description": "A Homebrewing (as in Beer) application",
   "keywords": [
     "homebrewing",
