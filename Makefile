@@ -10,14 +10,11 @@ proto-gen:
 # rebuild the proto definitions
 # The protoc tool is sourced from: https://github.com/protocolbuffers/protobuf/releases
 proto:
-	PATH=$$PATH:$$GOPATH/bin ./third_party/protoc/bin/protoc internal/electron/proto/*.proto --go_out=.
-
-proto-copy:
-	cp internal/electron/proto/*.proto desktop/src/proto/
+	PATH=$$PATH:$$GOPATH/bin ./third_party/protoc/win64/bin/protoc internal/electron/proto/*.proto --go_out=.
 
 proto-js:
-	cd desktop/src/proto; ../../../third_party/protoc/bin/protoc -I . *.proto --js_out=import_style=commonjs,binary:.
+	./third_party/protoc/win64/bin/protoc.exe internal/electron/proto/*.proto --js_out=import_style=commonjs,binary:desktop/src/proto
 
-proto-all: proto proto-copy proto-js
+proto-all: proto proto-js
 
 .PHONY: proto
