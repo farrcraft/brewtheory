@@ -16,30 +16,31 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* eslint global-require: off */
+import ApiInterface from '../interfaces/api/Api';
+import RegistrarInterface from '../interfaces/api/Registrar';
+import Kex from './endpoints/Kex';
 
 /**
- * This module executes inside of electron's main process. You can start
- * electron renderer process from here and communicate with the other processes
- * through IPC.
  *
  */
-import { app } from 'electron';
-import App from './App';
+class Registrar implements RegistrarInterface {
+  api: ApiInterface;
 
-const mainApp = new App();
+  constructor(api: ApiInterface) {
+    this.api = api;
+  }
 
-/*
-process.on('error', err => {
-  mainApp.logger.debug(err);
-});
-*/
+  setApi(api: ApiInterface): void {
+    this.api = api;
+  }
 
-// We only want a single instance to be able to run at once
-const gotTheLock: boolean = app.requestSingleInstanceLock();
-if (!gotTheLock) {
-  mainApp.logger.debug('Existing instance lock, exiting.');
-  app.quit();
+  /**
+   *
+   * @param api
+   */
+  register(): void {
+    this.api.registerProvider(new Kex());
+  }
 }
 
-mainApp.registerHandlers();
+export default Registrar;

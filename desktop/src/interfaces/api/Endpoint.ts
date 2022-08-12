@@ -16,30 +16,39 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* eslint global-require: off */
+import Rpc from '../rpc/Rpc';
 
 /**
- * This module executes inside of electron's main process. You can start
- * electron renderer process from here and communicate with the other processes
- * through IPC.
  *
  */
-import { app } from 'electron';
-import App from './App';
+interface Endpoint {
+  /**
+   *
+   */
+  name: string;
 
-const mainApp = new App();
+  /**
+   *
+   */
+  rpc: Rpc | null;
 
-/*
-process.on('error', err => {
-  mainApp.logger.debug(err);
-});
-*/
+  /**
+   *
+   * @param rpc
+   */
+  setRpc(rpc: Rpc): void;
 
-// We only want a single instance to be able to run at once
-const gotTheLock: boolean = app.requestSingleInstanceLock();
-if (!gotTheLock) {
-  mainApp.logger.debug('Existing instance lock, exiting.');
-  app.quit();
+  /**
+   *
+   * @param name
+   */
+  setName(name: string): void;
+
+  /**
+   *
+   * @param name
+   */
+  getName(): string;
 }
 
-mainApp.registerHandlers();
+export default Endpoint;

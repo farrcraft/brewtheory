@@ -1,3 +1,21 @@
+/*
+BrewTheory
+Copyright (C) 2022  Joshua Farr
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 import childProcess from 'child_process';
 
 import Logger from '../core/Logger';
@@ -36,6 +54,7 @@ export default class Backend implements BackendInterface {
    *
    */
   start(): void {
+    this.logger.debug('Spawning backend process...');
     this.process = childProcess.spawn('./src/resources/backend');
     if (this.process.stdout !== null) {
       this.process.stdout.on('data', (data) => this.onStdout(data));
@@ -44,9 +63,6 @@ export default class Backend implements BackendInterface {
       this.process.stderr.on('data', (data) => this.onStderr(data));
     }
     this.process.on('exit', (code) => this.onExit(code));
-
-    // !!!! [FIXME] - this is just a short circuit until RPC in the backend is added
-    this.readyListener();
   }
 
   /**
@@ -60,6 +76,7 @@ export default class Backend implements BackendInterface {
     // service requests.  We'll want to make actual RPC calls to the SERVICE-READY
     // endpoint after this to guarantee the backend is fully operational.
     if (out === 'SERVICE_READY\n') {
+      this.logger.debug('Backend service is ready');
       this.readyListener();
     } else {
       this.logger.debug(out);

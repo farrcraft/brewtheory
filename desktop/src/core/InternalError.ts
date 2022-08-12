@@ -16,30 +16,25 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* eslint global-require: off */
+import InternalErrorInterface from '../interfaces/core/InternalError';
 
 /**
- * This module executes inside of electron's main process. You can start
- * electron renderer process from here and communicate with the other processes
- * through IPC.
  *
  */
-import { app } from 'electron';
-import App from './App';
+class InternalError extends Error implements InternalErrorInterface {
+  /**
+   *
+   * @param title
+   * @param msg
+   */
+  constructor(title: string, msg: string) {
+    super(msg);
+    this.setName(title);
+  }
 
-const mainApp = new App();
-
-/*
-process.on('error', err => {
-  mainApp.logger.debug(err);
-});
-*/
-
-// We only want a single instance to be able to run at once
-const gotTheLock: boolean = app.requestSingleInstanceLock();
-if (!gotTheLock) {
-  mainApp.logger.debug('Existing instance lock, exiting.');
-  app.quit();
+  setName(title: string): void {
+    this.name = title;
+  }
 }
 
-mainApp.registerHandlers();
+export default InternalError;
