@@ -33,6 +33,10 @@ func (rpc *Server) CreateSignature(response []byte, context *RequestContext) str
 
 // VerifyRequest uses the client's public key to verify the message signature
 func (rpc *Server) VerifyRequest(message []byte, sig []byte, context *RequestContext) bool {
+	if context.Token == nil {
+		rpc.Logger.Warn("Request context missing Token when verifying request")
+		return false
+	}
 	ok := ed25519.Verify(context.Token.VerifyPublicKey, message, sig)
 	if !ok {
 		rpc.Logger.Warn("Request payload signature could not be verified. key [", context.Token.VerifyPublicKey[:], "] message [", message, "] signature")
