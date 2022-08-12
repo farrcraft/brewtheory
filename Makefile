@@ -13,7 +13,8 @@ proto:
 	PATH=$$PATH:$$GOPATH/bin ./third_party/protoc/win64/bin/protoc internal/electron/proto/*.proto --go_out=.
 
 proto-js:
-	./third_party/protoc/win64/bin/protoc.exe internal/electron/proto/*.proto --js_out=import_style=commonjs,binary:desktop/src/proto
+	./third_party/protoc/win64/bin/protoc.exe internal/electron/proto/*.proto --js_out=import_style=commonjs,binary:.; \
+	mv internal/electron/proto/*.js desktop/src/proto/
 
 proto-all: proto proto-js
 
