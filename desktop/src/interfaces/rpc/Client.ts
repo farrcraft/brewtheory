@@ -16,6 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import CertificateInterface from '../core/Certificate';
 import Response from './Response';
 
 /**
@@ -46,6 +47,11 @@ interface Client {
    * The public key from the backend for verifying message signatures
    */
   verifyPublicKey: Uint8Array | null;
+
+  /**
+   * The SSL certificate created by the backend process
+   */
+  certificate: CertificateInterface;
 
   /**
    *

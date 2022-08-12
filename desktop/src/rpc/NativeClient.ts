@@ -44,9 +44,10 @@ class NativeClient extends Client {
       method: 'POST',
     };
     // console.log(`requesting ${method}`);
-    if (this.certificate !== undefined) {
-      options.cert = this.certificate;
-      options.ca = this.certificate;
+    const certBuffer = this.certificate.getBuffer();
+    if (certBuffer !== undefined) {
+      options.cert = certBuffer;
+      options.ca = certBuffer;
     } else {
       // we haven't loaded the cert yet, so ignore the ssl errors on this request
       options.rejectUnauthorized = false;

@@ -70,16 +70,16 @@ class App {
     this.logger = new Logger(userDataPath);
     this.logger.debug(`user data path is ${userDataPath}`);
 
+    const certPath = path.join(userDataPath, 'certificate');
+    this.certificate = new Certificate(certPath);
+
     // The RPC module talks to the backend
-    this.rpc = new Rpc();
+    this.rpc = new Rpc(this.certificate);
     // The API layer uses the RPC as its transport layer
     this.api = new Api(this.rpc);
 
     const registrar = new Registrar(this.api);
     registrar.register();
-
-    const certPath = path.join(userDataPath, 'certificate');
-    this.certificate = new Certificate(certPath);
 
     this.backend = new Backend(this.logger, () => this.onBackendReady());
     this.window = new Window();
@@ -154,7 +154,6 @@ class App {
       // [FIXME] - need to shutdown from here
       app.quit();
     }
-    this.rpc.certificate = this.certificate.certificate;
 
     // The backend is only guaranteed to be in its initial service ready state
     // where its at least created the SSL certificate, but might not yet be
@@ -162,7 +161,7 @@ class App {
     const ok = await this.rpc.waitForReady();
     if (ok !== true) {
       // [FIXME] - shutdown
-      this.logger.error('gave up waiting for rpc.');
+      this.logger.error('Gave up waiting for rpc.');
       app.quit();
       return;
     }
@@ -170,10 +169,10 @@ class App {
     // [FIXME] - should use constant of some kind of endpoint name here?
     const kex = <Kex>this.api.getEndpoint('kex');
     try {
-      console.log('trying key exchange');
+      console.log('attempting key exchange');
       kex.keyExchange();
     } catch (err) {
-      this.logger.error(`key exchange failed ${err}`);
+      this.logger.error(`Key exchange failed ${err}`);
       // [FIXME] - shutdown
       app.quit();
     }

@@ -34,6 +34,11 @@ interface Certificate {
    *
    */
   load(): void;
+
+  /**
+   *
+   */
+  getBuffer(): Buffer | undefined;
 }
 
 export default Certificate;

@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import nacl from 'tweetnacl';
 import base64js from 'base64-js';
 
+import CertificateInterface from '../interfaces/core/Certificate';
 import ClientInterface from '../interfaces/rpc/Client';
 import ResponseInterface from '../interfaces/rpc/Response';
 import InternalError from '../core/InternalError';
@@ -61,7 +62,7 @@ class Client implements ClientInterface {
   /**
    * The SSL certificate created by the backend process
    */
-  certificate: Buffer | undefined;
+  certificate: CertificateInterface;
 
   /**
    *
@@ -76,11 +77,13 @@ class Client implements ClientInterface {
   /**
    * Initialize the RPC system
    */
-  constructor() {
+  constructor(cert: CertificateInterface) {
     // create the message signing keys
     let keyPair: nacl.SignKeyPair | null = nacl.sign.keyPair();
     this.signPublicKey = keyPair.publicKey;
     this.signPrivateKey = keyPair.secretKey;
+
+    this.certificate = cert;
     this.verifyPublicKey = new Uint8Array();
     this.clientToken = 'Empty';
     keyPair = null;

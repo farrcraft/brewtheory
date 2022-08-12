@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import AjaxClient from './AjaxClient';
 import NativeClient from './NativeClient';
 import RpcInterface from '../interfaces/rpc/Rpc';
+import CertificateInterface from '../interfaces/core/Certificate';
 import ClientInterface from '../interfaces/rpc/Client';
 
 // type RpcRequestCallback = (response: request.Response, body: any) => void;
@@ -39,16 +40,17 @@ export default class Rpc implements RpcInterface {
   /**
    * The SSL certificate created by the backend process
    */
-  certificate: Buffer | undefined;
+  certificate: CertificateInterface;
 
   /**
    * Initialize the RPC system
    */
-  constructor() {
+  constructor(cert: CertificateInterface) {
+    this.certificate = cert;
     if (typeof window === 'undefined') {
-      this.client = new NativeClient();
+      this.client = new NativeClient(cert);
     } else {
-      this.client = new AjaxClient();
+      this.client = new AjaxClient(cert);
     }
   }
 

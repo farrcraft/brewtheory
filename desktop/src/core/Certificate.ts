@@ -72,6 +72,14 @@ class Certificate implements CertificateInterface {
       throw new InternalError('Certificate Error', msg);
     }
   }
+
+  /**
+   *
+   * @returns
+   */
+  getBuffer(): Buffer | undefined {
+    return this.certificate;
+  }
 }
 
 export default Certificate;

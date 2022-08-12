@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import Client from './Client';
+import CertificateInterface from '../core/Certificate';
 
 /**
  * The interface for making RPC requests to the backend process
@@ -30,7 +31,7 @@ interface Rpc {
   /**
    * The SSL certificate created by the backend process
    */
-  certificate: Buffer | undefined;
+  certificate: CertificateInterface;
 
   /**
    *
