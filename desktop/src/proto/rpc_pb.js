@@ -1,4 +1,4 @@
-// source: internal/electron/proto/rpc.proto
+// source: rpc.proto
 /**
  * @fileoverview
  * @enhanceable
@@ -15,8 +15,8 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = (function() { return this || window || global || self || Function('return this')(); }).call(null);
 
-var internal_electron_proto_common_pb = require('../../../internal/electron/proto/common_pb.js');
-goog.object.extend(proto, internal_electron_proto_common_pb);
+var common_pb = require('./common_pb.js');
+goog.object.extend(proto, common_pb);
 goog.exportSymbol('proto.brewtheory.EmptyRequest', null, global);
 goog.exportSymbol('proto.brewtheory.EmptyResponse', null, global);
 goog.exportSymbol('proto.brewtheory.IdRequest', null, global);
@@ -137,7 +137,7 @@ proto.brewtheory.EmptyRequest.prototype.toObject = function(opt_includeInstance)
  */
 proto.brewtheory.EmptyRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    header: (f = msg.getHeader()) && internal_electron_proto_common_pb.RequestHeader.toObject(includeInstance, f)
+    header: (f = msg.getHeader()) && common_pb.RequestHeader.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -175,8 +175,8 @@ proto.brewtheory.EmptyRequest.deserializeBinaryFromReader = function(msg, reader
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new internal_electron_proto_common_pb.RequestHeader;
-      reader.readMessage(value,internal_electron_proto_common_pb.RequestHeader.deserializeBinaryFromReader);
+      var value = new common_pb.RequestHeader;
+      reader.readMessage(value,common_pb.RequestHeader.deserializeBinaryFromReader);
       msg.setHeader(value);
       break;
     default:
@@ -213,7 +213,7 @@ proto.brewtheory.EmptyRequest.serializeBinaryToWriter = function(message, writer
     writer.writeMessage(
       1,
       f,
-      internal_electron_proto_common_pb.RequestHeader.serializeBinaryToWriter
+      common_pb.RequestHeader.serializeBinaryToWriter
     );
   }
 };
@@ -225,7 +225,7 @@ proto.brewtheory.EmptyRequest.serializeBinaryToWriter = function(message, writer
  */
 proto.brewtheory.EmptyRequest.prototype.getHeader = function() {
   return /** @type{?proto.brewtheory.RequestHeader} */ (
-    jspb.Message.getWrapperField(this, internal_electron_proto_common_pb.RequestHeader, 1));
+    jspb.Message.getWrapperField(this, common_pb.RequestHeader, 1));
 };
 
 
@@ -288,7 +288,7 @@ proto.brewtheory.EmptyResponse.prototype.toObject = function(opt_includeInstance
  */
 proto.brewtheory.EmptyResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    header: (f = msg.getHeader()) && internal_electron_proto_common_pb.ResponseHeader.toObject(includeInstance, f)
+    header: (f = msg.getHeader()) && common_pb.ResponseHeader.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -326,8 +326,8 @@ proto.brewtheory.EmptyResponse.deserializeBinaryFromReader = function(msg, reade
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new internal_electron_proto_common_pb.ResponseHeader;
-      reader.readMessage(value,internal_electron_proto_common_pb.ResponseHeader.deserializeBinaryFromReader);
+      var value = new common_pb.ResponseHeader;
+      reader.readMessage(value,common_pb.ResponseHeader.deserializeBinaryFromReader);
       msg.setHeader(value);
       break;
     default:
@@ -364,7 +364,7 @@ proto.brewtheory.EmptyResponse.serializeBinaryToWriter = function(message, write
     writer.writeMessage(
       1,
       f,
-      internal_electron_proto_common_pb.ResponseHeader.serializeBinaryToWriter
+      common_pb.ResponseHeader.serializeBinaryToWriter
     );
   }
 };
@@ -376,7 +376,7 @@ proto.brewtheory.EmptyResponse.serializeBinaryToWriter = function(message, write
  */
 proto.brewtheory.EmptyResponse.prototype.getHeader = function() {
   return /** @type{?proto.brewtheory.ResponseHeader} */ (
-    jspb.Message.getWrapperField(this, internal_electron_proto_common_pb.ResponseHeader, 1));
+    jspb.Message.getWrapperField(this, common_pb.ResponseHeader, 1));
 };
 
 
@@ -439,7 +439,7 @@ proto.brewtheory.IdRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.brewtheory.IdRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    header: (f = msg.getHeader()) && internal_electron_proto_common_pb.RequestHeader.toObject(includeInstance, f),
+    header: (f = msg.getHeader()) && common_pb.RequestHeader.toObject(includeInstance, f),
     id: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
@@ -478,8 +478,8 @@ proto.brewtheory.IdRequest.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new internal_electron_proto_common_pb.RequestHeader;
-      reader.readMessage(value,internal_electron_proto_common_pb.RequestHeader.deserializeBinaryFromReader);
+      var value = new common_pb.RequestHeader;
+      reader.readMessage(value,common_pb.RequestHeader.deserializeBinaryFromReader);
       msg.setHeader(value);
       break;
     case 2:
@@ -520,7 +520,7 @@ proto.brewtheory.IdRequest.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       1,
       f,
-      internal_electron_proto_common_pb.RequestHeader.serializeBinaryToWriter
+      common_pb.RequestHeader.serializeBinaryToWriter
     );
   }
   f = message.getId();
@@ -539,7 +539,7 @@ proto.brewtheory.IdRequest.serializeBinaryToWriter = function(message, writer) {
  */
 proto.brewtheory.IdRequest.prototype.getHeader = function() {
   return /** @type{?proto.brewtheory.RequestHeader} */ (
-    jspb.Message.getWrapperField(this, internal_electron_proto_common_pb.RequestHeader, 1));
+    jspb.Message.getWrapperField(this, common_pb.RequestHeader, 1));
 };
 
 
@@ -620,7 +620,7 @@ proto.brewtheory.IdResponse.prototype.toObject = function(opt_includeInstance) {
  */
 proto.brewtheory.IdResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    header: (f = msg.getHeader()) && internal_electron_proto_common_pb.ResponseHeader.toObject(includeInstance, f),
+    header: (f = msg.getHeader()) && common_pb.ResponseHeader.toObject(includeInstance, f),
     id: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
@@ -659,8 +659,8 @@ proto.brewtheory.IdResponse.deserializeBinaryFromReader = function(msg, reader) 
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new internal_electron_proto_common_pb.ResponseHeader;
-      reader.readMessage(value,internal_electron_proto_common_pb.ResponseHeader.deserializeBinaryFromReader);
+      var value = new common_pb.ResponseHeader;
+      reader.readMessage(value,common_pb.ResponseHeader.deserializeBinaryFromReader);
       msg.setHeader(value);
       break;
     case 2:
@@ -701,7 +701,7 @@ proto.brewtheory.IdResponse.serializeBinaryToWriter = function(message, writer) 
     writer.writeMessage(
       1,
       f,
-      internal_electron_proto_common_pb.ResponseHeader.serializeBinaryToWriter
+      common_pb.ResponseHeader.serializeBinaryToWriter
     );
   }
   f = message.getId();
@@ -720,7 +720,7 @@ proto.brewtheory.IdResponse.serializeBinaryToWriter = function(message, writer) 
  */
 proto.brewtheory.IdResponse.prototype.getHeader = function() {
   return /** @type{?proto.brewtheory.ResponseHeader} */ (
-    jspb.Message.getWrapperField(this, internal_electron_proto_common_pb.ResponseHeader, 1));
+    jspb.Message.getWrapperField(this, common_pb.ResponseHeader, 1));
 };
 
 

@@ -22,7 +22,7 @@ package brewtheory;
 
 option go_package = "internal/electron/proto";
 
-import public "internal/electron/proto/common.proto";
+import public "common.proto";
 
 // N.B. - In the go bindings, case of the generated methods matches these proto definitions
 // However, in the JS bindings, method names start lowercase (so it's, e.g. "openMasterDb" instead of "OpenMasterDb")

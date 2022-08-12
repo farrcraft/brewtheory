@@ -1,4 +1,4 @@
-// source: internal/electron/proto/common.proto
+// source: common.proto
 /**
  * @fileoverview
  * @enhanceable

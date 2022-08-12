@@ -19,7 +19,7 @@
 // versions:
 // 	protoc-gen-go v1.28.1
 // 	protoc        v3.20.1
-// source: internal/electron/proto/kex.proto
+// source: kex.proto
 
 package proto
 
@@ -50,7 +50,7 @@ type KeyExchangeRequest struct {
 func (x *KeyExchangeRequest) Reset() {
 	*x = KeyExchangeRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_internal_electron_proto_kex_proto_msgTypes[0]
+		mi := &file_kex_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -63,7 +63,7 @@ func (x *KeyExchangeRequest) String() string {
 func (*KeyExchangeRequest) ProtoMessage() {}
 
 func (x *KeyExchangeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_electron_proto_kex_proto_msgTypes[0]
+	mi := &file_kex_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -76,7 +76,7 @@ func (x *KeyExchangeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KeyExchangeRequest.ProtoReflect.Descriptor instead.
 func (*KeyExchangeRequest) Descriptor() ([]byte, []int) {
-	return file_internal_electron_proto_kex_proto_rawDescGZIP(), []int{0}
+	return file_kex_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *KeyExchangeRequest) GetHeader() *RequestHeader {
@@ -107,7 +107,7 @@ type KeyExchangeResponse struct {
 func (x *KeyExchangeResponse) Reset() {
 	*x = KeyExchangeResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_internal_electron_proto_kex_proto_msgTypes[1]
+		mi := &file_kex_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -120,7 +120,7 @@ func (x *KeyExchangeResponse) String() string {
 func (*KeyExchangeResponse) ProtoMessage() {}
 
 func (x *KeyExchangeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_electron_proto_kex_proto_msgTypes[1]
+	mi := &file_kex_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -133,7 +133,7 @@ func (x *KeyExchangeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KeyExchangeResponse.ProtoReflect.Descriptor instead.
 func (*KeyExchangeResponse) Descriptor() ([]byte, []int) {
-	return file_internal_electron_proto_kex_proto_rawDescGZIP(), []int{1}
+	return file_kex_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *KeyExchangeResponse) GetHeader() *ResponseHeader {
@@ -157,14 +157,11 @@ func (x *KeyExchangeResponse) GetToken() string {
 	return ""
 }
 
-var File_internal_electron_proto_kex_proto protoreflect.FileDescriptor
+var File_kex_proto protoreflect.FileDescriptor
 
-var file_internal_electron_proto_kex_proto_rawDesc = []byte{
-	0x0a, 0x21, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x2f, 0x65, 0x6c, 0x65, 0x63, 0x74,
-	0x72, 0x6f, 0x6e, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x6b, 0x65, 0x78, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x12, 0x0a, 0x62, 0x72, 0x65, 0x77, 0x74, 0x68, 0x65, 0x6f, 0x72, 0x79, 0x1a,
-	0x24, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x2f, 0x65, 0x6c, 0x65, 0x63, 0x74, 0x72,
-	0x6f, 0x6e, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e,
+var file_kex_proto_rawDesc = []byte{
+	0x0a, 0x09, 0x6b, 0x65, 0x78, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0a, 0x62, 0x72, 0x65,
+	0x77, 0x74, 0x68, 0x65, 0x6f, 0x72, 0x79, 0x1a, 0x0c, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x65, 0x0a, 0x12, 0x4b, 0x65, 0x79, 0x45, 0x78, 0x63, 0x68,
 	0x61, 0x6e, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x31, 0x0a, 0x06, 0x68,
 	0x65, 0x61, 0x64, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x62, 0x72,
@@ -185,25 +182,25 @@ var file_internal_electron_proto_kex_proto_rawDesc = []byte{
 }
 
 var (
-	file_internal_electron_proto_kex_proto_rawDescOnce sync.Once
-	file_internal_electron_proto_kex_proto_rawDescData = file_internal_electron_proto_kex_proto_rawDesc
+	file_kex_proto_rawDescOnce sync.Once
+	file_kex_proto_rawDescData = file_kex_proto_rawDesc
 )
 
-func file_internal_electron_proto_kex_proto_rawDescGZIP() []byte {
-	file_internal_electron_proto_kex_proto_rawDescOnce.Do(func() {
-		file_internal_electron_proto_kex_proto_rawDescData = protoimpl.X.CompressGZIP(file_internal_electron_proto_kex_proto_rawDescData)
+func file_kex_proto_rawDescGZIP() []byte {
+	file_kex_proto_rawDescOnce.Do(func() {
+		file_kex_proto_rawDescData = protoimpl.X.CompressGZIP(file_kex_proto_rawDescData)
 	})
-	return file_internal_electron_proto_kex_proto_rawDescData
+	return file_kex_proto_rawDescData
 }
 
-var file_internal_electron_proto_kex_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_internal_electron_proto_kex_proto_goTypes = []interface{}{
+var file_kex_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_kex_proto_goTypes = []interface{}{
 	(*KeyExchangeRequest)(nil),  // 0: brewtheory.KeyExchangeRequest
 	(*KeyExchangeResponse)(nil), // 1: brewtheory.KeyExchangeResponse
 	(*RequestHeader)(nil),       // 2: brewtheory.RequestHeader
 	(*ResponseHeader)(nil),      // 3: brewtheory.ResponseHeader
 }
-var file_internal_electron_proto_kex_proto_depIdxs = []int32{
+var file_kex_proto_depIdxs = []int32{
 	2, // 0: brewtheory.KeyExchangeRequest.header:type_name -> brewtheory.RequestHeader
 	3, // 1: brewtheory.KeyExchangeResponse.header:type_name -> brewtheory.ResponseHeader
 	2, // [2:2] is the sub-list for method output_type
@@ -213,14 +210,14 @@ var file_internal_electron_proto_kex_proto_depIdxs = []int32{
 	0, // [0:2] is the sub-list for field type_name
 }
 
-func init() { file_internal_electron_proto_kex_proto_init() }
-func file_internal_electron_proto_kex_proto_init() {
-	if File_internal_electron_proto_kex_proto != nil {
+func init() { file_kex_proto_init() }
+func file_kex_proto_init() {
+	if File_kex_proto != nil {
 		return
 	}
-	file_internal_electron_proto_common_proto_init()
+	file_common_proto_init()
 	if !protoimpl.UnsafeEnabled {
-		file_internal_electron_proto_kex_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_kex_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*KeyExchangeRequest); i {
 			case 0:
 				return &v.state
@@ -232,7 +229,7 @@ func file_internal_electron_proto_kex_proto_init() {
 				return nil
 			}
 		}
-		file_internal_electron_proto_kex_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_kex_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*KeyExchangeResponse); i {
 			case 0:
 				return &v.state
@@ -249,18 +246,18 @@ func file_internal_electron_proto_kex_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_internal_electron_proto_kex_proto_rawDesc,
+			RawDescriptor: file_kex_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_internal_electron_proto_kex_proto_goTypes,
-		DependencyIndexes: file_internal_electron_proto_kex_proto_depIdxs,
-		MessageInfos:      file_internal_electron_proto_kex_proto_msgTypes,
+		GoTypes:           file_kex_proto_goTypes,
+		DependencyIndexes: file_kex_proto_depIdxs,
+		MessageInfos:      file_kex_proto_msgTypes,
 	}.Build()
-	File_internal_electron_proto_kex_proto = out.File
-	file_internal_electron_proto_kex_proto_rawDesc = nil
-	file_internal_electron_proto_kex_proto_goTypes = nil
-	file_internal_electron_proto_kex_proto_depIdxs = nil
+	File_kex_proto = out.File
+	file_kex_proto_rawDesc = nil
+	file_kex_proto_goTypes = nil
+	file_kex_proto_depIdxs = nil
 }

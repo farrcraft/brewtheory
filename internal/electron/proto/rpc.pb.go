@@ -19,7 +19,7 @@
 // versions:
 // 	protoc-gen-go v1.28.1
 // 	protoc        v3.20.1
-// source: internal/electron/proto/rpc.proto
+// source: rpc.proto
 
 package proto
 
@@ -48,7 +48,7 @@ type EmptyRequest struct {
 func (x *EmptyRequest) Reset() {
 	*x = EmptyRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_internal_electron_proto_rpc_proto_msgTypes[0]
+		mi := &file_rpc_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -61,7 +61,7 @@ func (x *EmptyRequest) String() string {
 func (*EmptyRequest) ProtoMessage() {}
 
 func (x *EmptyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_electron_proto_rpc_proto_msgTypes[0]
+	mi := &file_rpc_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -74,7 +74,7 @@ func (x *EmptyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EmptyRequest.ProtoReflect.Descriptor instead.
 func (*EmptyRequest) Descriptor() ([]byte, []int) {
-	return file_internal_electron_proto_rpc_proto_rawDescGZIP(), []int{0}
+	return file_rpc_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *EmptyRequest) GetHeader() *RequestHeader {
@@ -95,7 +95,7 @@ type EmptyResponse struct {
 func (x *EmptyResponse) Reset() {
 	*x = EmptyResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_internal_electron_proto_rpc_proto_msgTypes[1]
+		mi := &file_rpc_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -108,7 +108,7 @@ func (x *EmptyResponse) String() string {
 func (*EmptyResponse) ProtoMessage() {}
 
 func (x *EmptyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_electron_proto_rpc_proto_msgTypes[1]
+	mi := &file_rpc_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -121,7 +121,7 @@ func (x *EmptyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EmptyResponse.ProtoReflect.Descriptor instead.
 func (*EmptyResponse) Descriptor() ([]byte, []int) {
-	return file_internal_electron_proto_rpc_proto_rawDescGZIP(), []int{1}
+	return file_rpc_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *EmptyResponse) GetHeader() *ResponseHeader {
@@ -144,7 +144,7 @@ type IdRequest struct {
 func (x *IdRequest) Reset() {
 	*x = IdRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_internal_electron_proto_rpc_proto_msgTypes[2]
+		mi := &file_rpc_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -157,7 +157,7 @@ func (x *IdRequest) String() string {
 func (*IdRequest) ProtoMessage() {}
 
 func (x *IdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_electron_proto_rpc_proto_msgTypes[2]
+	mi := &file_rpc_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -170,7 +170,7 @@ func (x *IdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IdRequest.ProtoReflect.Descriptor instead.
 func (*IdRequest) Descriptor() ([]byte, []int) {
-	return file_internal_electron_proto_rpc_proto_rawDescGZIP(), []int{2}
+	return file_rpc_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *IdRequest) GetHeader() *RequestHeader {
@@ -200,7 +200,7 @@ type IdResponse struct {
 func (x *IdResponse) Reset() {
 	*x = IdResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_internal_electron_proto_rpc_proto_msgTypes[3]
+		mi := &file_rpc_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -213,7 +213,7 @@ func (x *IdResponse) String() string {
 func (*IdResponse) ProtoMessage() {}
 
 func (x *IdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_electron_proto_rpc_proto_msgTypes[3]
+	mi := &file_rpc_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -226,7 +226,7 @@ func (x *IdResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IdResponse.ProtoReflect.Descriptor instead.
 func (*IdResponse) Descriptor() ([]byte, []int) {
-	return file_internal_electron_proto_rpc_proto_rawDescGZIP(), []int{3}
+	return file_rpc_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *IdResponse) GetHeader() *ResponseHeader {
@@ -243,14 +243,11 @@ func (x *IdResponse) GetId() string {
 	return ""
 }
 
-var File_internal_electron_proto_rpc_proto protoreflect.FileDescriptor
+var File_rpc_proto protoreflect.FileDescriptor
 
-var file_internal_electron_proto_rpc_proto_rawDesc = []byte{
-	0x0a, 0x21, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x2f, 0x65, 0x6c, 0x65, 0x63, 0x74,
-	0x72, 0x6f, 0x6e, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x72, 0x70, 0x63, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x12, 0x0a, 0x62, 0x72, 0x65, 0x77, 0x74, 0x68, 0x65, 0x6f, 0x72, 0x79, 0x1a,
-	0x24, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x2f, 0x65, 0x6c, 0x65, 0x63, 0x74, 0x72,
-	0x6f, 0x6e, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e,
+var file_rpc_proto_rawDesc = []byte{
+	0x0a, 0x09, 0x72, 0x70, 0x63, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0a, 0x62, 0x72, 0x65,
+	0x77, 0x74, 0x68, 0x65, 0x6f, 0x72, 0x79, 0x1a, 0x0c, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x41, 0x0a, 0x0c, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x52, 0x65,
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x31, 0x0a, 0x06, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x18,
 	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x62, 0x72, 0x65, 0x77, 0x74, 0x68, 0x65, 0x6f,
@@ -276,19 +273,19 @@ var file_internal_electron_proto_rpc_proto_rawDesc = []byte{
 }
 
 var (
-	file_internal_electron_proto_rpc_proto_rawDescOnce sync.Once
-	file_internal_electron_proto_rpc_proto_rawDescData = file_internal_electron_proto_rpc_proto_rawDesc
+	file_rpc_proto_rawDescOnce sync.Once
+	file_rpc_proto_rawDescData = file_rpc_proto_rawDesc
 )
 
-func file_internal_electron_proto_rpc_proto_rawDescGZIP() []byte {
-	file_internal_electron_proto_rpc_proto_rawDescOnce.Do(func() {
-		file_internal_electron_proto_rpc_proto_rawDescData = protoimpl.X.CompressGZIP(file_internal_electron_proto_rpc_proto_rawDescData)
+func file_rpc_proto_rawDescGZIP() []byte {
+	file_rpc_proto_rawDescOnce.Do(func() {
+		file_rpc_proto_rawDescData = protoimpl.X.CompressGZIP(file_rpc_proto_rawDescData)
 	})
-	return file_internal_electron_proto_rpc_proto_rawDescData
+	return file_rpc_proto_rawDescData
 }
 
-var file_internal_electron_proto_rpc_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
-var file_internal_electron_proto_rpc_proto_goTypes = []interface{}{
+var file_rpc_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_rpc_proto_goTypes = []interface{}{
 	(*EmptyRequest)(nil),   // 0: brewtheory.EmptyRequest
 	(*EmptyResponse)(nil),  // 1: brewtheory.EmptyResponse
 	(*IdRequest)(nil),      // 2: brewtheory.IdRequest
@@ -296,7 +293,7 @@ var file_internal_electron_proto_rpc_proto_goTypes = []interface{}{
 	(*RequestHeader)(nil),  // 4: brewtheory.RequestHeader
 	(*ResponseHeader)(nil), // 5: brewtheory.ResponseHeader
 }
-var file_internal_electron_proto_rpc_proto_depIdxs = []int32{
+var file_rpc_proto_depIdxs = []int32{
 	4, // 0: brewtheory.EmptyRequest.header:type_name -> brewtheory.RequestHeader
 	5, // 1: brewtheory.EmptyResponse.header:type_name -> brewtheory.ResponseHeader
 	4, // 2: brewtheory.IdRequest.header:type_name -> brewtheory.RequestHeader
@@ -308,14 +305,14 @@ var file_internal_electron_proto_rpc_proto_depIdxs = []int32{
 	0, // [0:4] is the sub-list for field type_name
 }
 
-func init() { file_internal_electron_proto_rpc_proto_init() }
-func file_internal_electron_proto_rpc_proto_init() {
-	if File_internal_electron_proto_rpc_proto != nil {
+func init() { file_rpc_proto_init() }
+func file_rpc_proto_init() {
+	if File_rpc_proto != nil {
 		return
 	}
-	file_internal_electron_proto_common_proto_init()
+	file_common_proto_init()
 	if !protoimpl.UnsafeEnabled {
-		file_internal_electron_proto_rpc_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_rpc_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*EmptyRequest); i {
 			case 0:
 				return &v.state
@@ -327,7 +324,7 @@ func file_internal_electron_proto_rpc_proto_init() {
 				return nil
 			}
 		}
-		file_internal_electron_proto_rpc_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_rpc_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*EmptyResponse); i {
 			case 0:
 				return &v.state
@@ -339,7 +336,7 @@ func file_internal_electron_proto_rpc_proto_init() {
 				return nil
 			}
 		}
-		file_internal_electron_proto_rpc_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_rpc_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*IdRequest); i {
 			case 0:
 				return &v.state
@@ -351,7 +348,7 @@ func file_internal_electron_proto_rpc_proto_init() {
 				return nil
 			}
 		}
-		file_internal_electron_proto_rpc_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_rpc_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*IdResponse); i {
 			case 0:
 				return &v.state
@@ -368,18 +365,18 @@ func file_internal_electron_proto_rpc_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_internal_electron_proto_rpc_proto_rawDesc,
+			RawDescriptor: file_rpc_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_internal_electron_proto_rpc_proto_goTypes,
-		DependencyIndexes: file_internal_electron_proto_rpc_proto_depIdxs,
-		MessageInfos:      file_internal_electron_proto_rpc_proto_msgTypes,
+		GoTypes:           file_rpc_proto_goTypes,
+		DependencyIndexes: file_rpc_proto_depIdxs,
+		MessageInfos:      file_rpc_proto_msgTypes,
 	}.Build()
-	File_internal_electron_proto_rpc_proto = out.File
-	file_internal_electron_proto_rpc_proto_rawDesc = nil
-	file_internal_electron_proto_rpc_proto_goTypes = nil
-	file_internal_electron_proto_rpc_proto_depIdxs = nil
+	File_rpc_proto = out.File
+	file_rpc_proto_rawDesc = nil
+	file_rpc_proto_goTypes = nil
+	file_rpc_proto_depIdxs = nil
 }

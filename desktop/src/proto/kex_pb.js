@@ -1,4 +1,4 @@
-// source: internal/electron/proto/kex.proto
+// source: kex.proto
 /**
  * @fileoverview
  * @enhanceable
@@ -15,8 +15,8 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = (function() { return this || window || global || self || Function('return this')(); }).call(null);
 
-var internal_electron_proto_common_pb = require('../../../internal/electron/proto/common_pb.js');
-goog.object.extend(proto, internal_electron_proto_common_pb);
+var common_pb = require('./common_pb.js');
+goog.object.extend(proto, common_pb);
 goog.exportSymbol('proto.brewtheory.KeyExchangeRequest', null, global);
 goog.exportSymbol('proto.brewtheory.KeyExchangeResponse', null, global);
 /**
@@ -93,7 +93,7 @@ proto.brewtheory.KeyExchangeRequest.prototype.toObject = function(opt_includeIns
  */
 proto.brewtheory.KeyExchangeRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    header: (f = msg.getHeader()) && internal_electron_proto_common_pb.RequestHeader.toObject(includeInstance, f),
+    header: (f = msg.getHeader()) && common_pb.RequestHeader.toObject(includeInstance, f),
     publickey: msg.getPublickey_asB64()
   };
 
@@ -132,8 +132,8 @@ proto.brewtheory.KeyExchangeRequest.deserializeBinaryFromReader = function(msg, 
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new internal_electron_proto_common_pb.RequestHeader;
-      reader.readMessage(value,internal_electron_proto_common_pb.RequestHeader.deserializeBinaryFromReader);
+      var value = new common_pb.RequestHeader;
+      reader.readMessage(value,common_pb.RequestHeader.deserializeBinaryFromReader);
       msg.setHeader(value);
       break;
     case 2:
@@ -174,7 +174,7 @@ proto.brewtheory.KeyExchangeRequest.serializeBinaryToWriter = function(message, 
     writer.writeMessage(
       1,
       f,
-      internal_electron_proto_common_pb.RequestHeader.serializeBinaryToWriter
+      common_pb.RequestHeader.serializeBinaryToWriter
     );
   }
   f = message.getPublickey_asU8();
@@ -193,7 +193,7 @@ proto.brewtheory.KeyExchangeRequest.serializeBinaryToWriter = function(message, 
  */
 proto.brewtheory.KeyExchangeRequest.prototype.getHeader = function() {
   return /** @type{?proto.brewtheory.RequestHeader} */ (
-    jspb.Message.getWrapperField(this, internal_electron_proto_common_pb.RequestHeader, 1));
+    jspb.Message.getWrapperField(this, common_pb.RequestHeader, 1));
 };
 
 
@@ -298,7 +298,7 @@ proto.brewtheory.KeyExchangeResponse.prototype.toObject = function(opt_includeIn
  */
 proto.brewtheory.KeyExchangeResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    header: (f = msg.getHeader()) && internal_electron_proto_common_pb.ResponseHeader.toObject(includeInstance, f),
+    header: (f = msg.getHeader()) && common_pb.ResponseHeader.toObject(includeInstance, f),
     publickey: msg.getPublickey_asB64(),
     token: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
@@ -338,8 +338,8 @@ proto.brewtheory.KeyExchangeResponse.deserializeBinaryFromReader = function(msg,
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new internal_electron_proto_common_pb.ResponseHeader;
-      reader.readMessage(value,internal_electron_proto_common_pb.ResponseHeader.deserializeBinaryFromReader);
+      var value = new common_pb.ResponseHeader;
+      reader.readMessage(value,common_pb.ResponseHeader.deserializeBinaryFromReader);
       msg.setHeader(value);
       break;
     case 2:
@@ -384,7 +384,7 @@ proto.brewtheory.KeyExchangeResponse.serializeBinaryToWriter = function(message,
     writer.writeMessage(
       1,
       f,
-      internal_electron_proto_common_pb.ResponseHeader.serializeBinaryToWriter
+      common_pb.ResponseHeader.serializeBinaryToWriter
     );
   }
   f = message.getPublickey_asU8();
@@ -410,7 +410,7 @@ proto.brewtheory.KeyExchangeResponse.serializeBinaryToWriter = function(message,
  */
 proto.brewtheory.KeyExchangeResponse.prototype.getHeader = function() {
   return /** @type{?proto.brewtheory.ResponseHeader} */ (
-    jspb.Message.getWrapperField(this, internal_electron_proto_common_pb.ResponseHeader, 1));
+    jspb.Message.getWrapperField(this, common_pb.ResponseHeader, 1));
 };
 
 
