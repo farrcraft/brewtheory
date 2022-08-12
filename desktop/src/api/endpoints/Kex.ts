@@ -40,7 +40,7 @@ class Kex extends Endpoint implements EndpointInterface {
     if (this.rpc === null) {
       throw new InternalError('Service Error', 'RPC Unavailable');
     }
-    const message = new messagesKex.KeyExchangeRequest();
+    const message = new messagesKex.brewtheory.KeyExchangeRequest();
     message.setPublickey(this.rpc.client.signPublicKey);
     const payload = message.serializeBinary();
 
@@ -49,7 +49,7 @@ class Kex extends Endpoint implements EndpointInterface {
       if (this.rpc === null) {
         throw new InternalError('Service Error', 'RPC Unavailable');
       }
-      const responseMessage = messagesKex.KeyExchangeResponse.deserializeBinary(
+      const responseMessage = messagesKex.brewtheory.KeyExchangeResponse.deserializeBinary(
         this.rpc.str2ab(body)
       );
 
