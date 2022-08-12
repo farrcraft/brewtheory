@@ -126,10 +126,12 @@ func (rpc *Server) VerifyHeaders(req *http.Request, context *RequestContext) boo
 	}
 	context.Header.Sequence = int32(parsedSeq)
 
-	context.Token.RecvCounter++
-	if context.Header.Method != "KeyExchange" && context.Header.Sequence != context.Token.RecvCounter {
-		rpc.Logger.Warn("Invalid message sequence received. Expected [", context.Token.RecvCounter, "] but got [", context.Header.Sequence, "]")
-		return false
+	if context.Header.Method != "KeyExchange" {
+		context.Token.RecvCounter++
+		if context.Header.Sequence != context.Token.RecvCounter {
+			rpc.Logger.Warn("Invalid message sequence received. Expected [", context.Token.RecvCounter, "] but got [", context.Header.Sequence, "]")
+			return false
+		}
 	}
 
 	return true
