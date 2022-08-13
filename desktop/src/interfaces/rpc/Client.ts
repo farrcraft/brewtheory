@@ -77,12 +77,6 @@ interface Client {
 
   /**
    *
-   * @param str
-   */
-  str2ab(str: string): Uint8Array;
-
-  /**
-   *
    * @param payload
    */
   createSignature(payload: string): Promise<string>;

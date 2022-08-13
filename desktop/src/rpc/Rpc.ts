@@ -163,29 +163,4 @@ console.log('CAUGHT CANCELED!');
     return view;
 */
   }
-
-  /**
-   *
-   * @param str
-   */
-  str2ab(str: string): Uint8Array {
-    /*
-    var buf = new ArrayBuffer(str.length * 2); // 2 bytes for each char
-    var bufView = new Uint8Array(buf);
-    for (var i = 0, strLen = str.length; i < strLen; i++) {
-      bufView[i] = str.charCodeAt(i);
-    }
-    */
-    const buffer = new ArrayBuffer(str.length * 2);
-    const view = new Uint8Array(buffer);
-    for (let i = 0, strLen = str.length; i < strLen; i += 1) {
-      view[i] = str.charCodeAt(i);
-    }
-    return view;
-    /*
-    const bytes = new Uint8Array(buf);
-    const dv = new DataView(bytes.buffer);
-    return dv.getUint8(0);
-    */
-  }
 }

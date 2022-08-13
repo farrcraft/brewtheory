@@ -178,16 +178,6 @@ class Client implements ClientInterface {
       throw new InternalError('Transport Error', 'Missing last response');
     }
   }
-
-  /**
-   *
-   * @param str
-   */
-  str2ab(str: string): Uint8Array {
-    const buffer = new ArrayBuffer(str.length * 2);
-    const view = new Uint8Array(buffer);
-    return view;
-  }
 }
 
 export default Client;
