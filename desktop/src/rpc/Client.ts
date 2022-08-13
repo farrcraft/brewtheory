@@ -16,8 +16,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import nacl from 'tweetnacl';
 import base64js from 'base64-js';
+import * as ed from '@noble/ed25519';
 
 import CertificateInterface from '../interfaces/core/Certificate';
 import ClientInterface from '../interfaces/rpc/Client';
@@ -41,12 +41,12 @@ class Client implements ClientInterface {
   /**
    * The public key used for request message signing
    */
-  signPublicKey: Uint8Array;
+  signPublicKey!: Uint8Array;
 
   /**
    * The private key used for request message signing
    */
-  signPrivateKey: Uint8Array;
+  signPrivateKey!: Uint8Array;
 
   /**
    * The backend server's public key used for verifying response messages.
@@ -78,17 +78,22 @@ class Client implements ClientInterface {
    * Initialize the RPC system
    */
   constructor(cert: CertificateInterface) {
-    // create the message signing keys
-    let keyPair: nacl.SignKeyPair | null = nacl.sign.keyPair();
-    this.signPublicKey = keyPair.publicKey;
-    this.signPrivateKey = keyPair.secretKey;
+    this.createSigningKeys();
 
     this.certificate = cert;
     this.verifyPublicKey = new Uint8Array();
     this.clientToken = 'Empty';
-    keyPair = null;
+
     this.lastResponse = null;
     this.lastError = null;
+  }
+
+  /**
+   *
+   */
+  async createSigningKeys(): Promise<void> {
+    this.signPrivateKey = ed.utils.randomPrivateKey();
+    this.signPublicKey = await ed.getPublicKey(this.signPrivateKey);
   }
 
   /**
@@ -106,8 +111,9 @@ class Client implements ClientInterface {
    *
    * @param payload The body of the request message
    */
-  createSignature(payload: Uint8Array): string {
-    const signature = nacl.sign.detached(payload, this.signPrivateKey);
+  async createSignature(payload: Uint8Array): Promise<string> {
+    // const signature = nacl.sign.detached(payload, this.signPrivateKey);
+    const signature = await ed.sign(payload, this.signPrivateKey);
     const rebased = base64js.fromByteArray(signature);
     return rebased;
   }

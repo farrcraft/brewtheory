@@ -103,6 +103,8 @@
     }
   },
   "dependencies": {
+    "@noble/ed25519": "1.6.1",
+    "base64-js": "1.5.1",
     "electron-debug": "3.2.0",
     "electron-log": "4.4.8",
     "electron-updater": "5.2.1",
@@ -110,7 +112,6 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.3.0",
-    "tweetnacl": "1.0.3",
     "winston": "3.8.1"
   },
   "devDependencies": {

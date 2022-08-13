@@ -36,7 +36,7 @@ class NativeClient extends Client {
    * @param payload
    * @returns a promise indicating whether the request was successful or not
    */
-  request(method: string, payload: Uint8Array | null): Promise<boolean> {
+  async request(method: string, payload: Uint8Array | null): Promise<boolean> {
     this.sendCounter += 1;
     const options: https.RequestOptions = {
       hostname: Endpoint.host,
@@ -60,7 +60,7 @@ class NativeClient extends Client {
     };
     let requestBody = '';
     if (payload !== null) {
-      const signature = this.createSignature(payload);
+      const signature = await this.createSignature(payload);
       options.headers['Message-Signature'] = signature;
       options.headers['Content-Type'] = 'application/octet-stream';
       // bas64 encode the payload so we don't have to worry about the protobuf wire format getting mangled during transit.
