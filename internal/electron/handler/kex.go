@@ -19,6 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package handler
 
 import (
+	"encoding/base64"
+
 	"google.golang.org/protobuf/proto"
 
 	"github.com/farrcraft/brewtheory/internal/electron/codes"
@@ -33,7 +35,13 @@ func KeyExchange(server *rpc.Server, message []byte, context *rpc.RequestContext
 	}
 
 	request := messages.KeyExchangeRequest{}
-	err := proto.Unmarshal(message, &request)
+	decodedMessage, err := base64.URLEncoding.DecodeString(string(message))
+	if err != nil {
+		server.Logger.Warn("Error decoding message - ", err)
+		rpc.SetRPCError(response.Header, codes.ErrorDecode)
+		return response, nil
+	}
+	err = proto.Unmarshal(decodedMessage, &request)
 	if err != nil {
 		server.Logger.Warn("Error unmarshaling message - ", err)
 		rpc.SetRPCError(response.Header, codes.ErrorDecode)
@@ -53,7 +61,8 @@ func KeyExchange(server *rpc.Server, message []byte, context *rpc.RequestContext
 	// are contained in the same message body, but it does give us assurance
 	// that we at least have a functional verification key.
 	// context.Token.VerifyPublicKey = new([ed25519.PublicKeySize]byte)
-	copy(context.Token.VerifyPublicKey[:], request.PublicKey)
+	context.Token.VerifyPublicKey = make([]byte, len(request.PublicKey))
+	copy(context.Token.VerifyPublicKey, request.PublicKey)
 
 	// send our own public key so client can verify our responses
 	response.PublicKey = context.Token.SignPublicKey[:]
