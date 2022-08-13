@@ -20,7 +20,6 @@ package rpc
 
 import (
 	"crypto/tls"
-	"encoding/base64"
 	"encoding/hex"
 	"io"
 	"log"
@@ -216,7 +215,7 @@ func (rpc *Server) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 		rpc.Logger.Warn("Error marshaling response - ", err)
 		return
 	}
-	encodedData := base64.StdEncoding.EncodeToString(responseData)
+	encodedData := hex.EncodeToString(responseData)
 
 	// set response headers
 	responseSignature := rpc.CreateSignature(responseData, context)
