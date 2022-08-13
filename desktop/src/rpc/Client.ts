@@ -16,7 +16,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import base64js from 'base64-js';
 import * as ed from '@noble/ed25519';
 
 import CertificateInterface from '../interfaces/core/Certificate';
@@ -123,15 +122,9 @@ class Client implements ClientInterface {
    * @param signature The response message signature
    * @param payload The message body
    */
-  verifySignature(signature: string, payload: string): boolean {
-    const decodedSignature = base64js.toByteArray(signature);
-    const decodedPayload = base64js.toByteArray(payload);
-    const ok = nacl.sign.detached.verify(
-      decodedPayload,
-      decodedSignature,
-      this.verifyPublicKey
-    );
-    return ok;
+  async verifySignature(signature: string, payload: string): Promise<boolean> {
+    const isValid = await ed.verify(signature, payload, this.verifyPublicKey);
+    return isValid;
   }
 
   /**
@@ -139,7 +132,7 @@ class Client implements ClientInterface {
    *
    * @param response
    */
-  verifyResponse(response: ResponseInterface): void {
+  async verifyResponse(response: ResponseInterface): Promise<void> {
     // [FIXME] - we rely on message sequence counters (not just here, but also when making
     // requests above)
     // If each process has its own rpc object (main/preload/renderer/etc), they'll each end up
@@ -161,12 +154,13 @@ class Client implements ClientInterface {
       throw new InternalError('Transport Error', 'Unexpected sequence');
     }
 
-    if (!('notekeeper-message-signature' in response.headers)) {
+    if (!('message-signature' in response.headers)) {
       throw new InternalError('Transport Error', 'Missing message signature');
     }
 
     const signature = response.headers['message-signature'] as string;
-    if (!this.verifySignature(signature, response.body.toString())) {
+    const ok = await this.verifySignature(signature, response.body);
+    if (!ok) {
       throw new InternalError(
         'Transport Error',
         'Failed to verify response signature'
@@ -177,9 +171,11 @@ class Client implements ClientInterface {
   /**
    *
    */
-  verifyLastResponse(): void {
+  async verifyLastResponse(): Promise<void> {
     if (this.lastResponse !== null) {
-      this.verifyResponse(this.lastResponse);
+      await this.verifyResponse(this.lastResponse);
+    } else {
+      throw new InternalError('Transport Error', 'Missing last response');
     }
   }
 

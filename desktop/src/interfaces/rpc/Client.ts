@@ -92,18 +92,18 @@ interface Client {
    * @param signature
    * @param payload
    */
-  verifySignature(signature: string, payload: string): boolean;
+  verifySignature(signature: string, payload: string): Promise<boolean>;
 
   /**
    *
    * @param response
    */
-  verifyResponse(response: Response): void;
+  verifyResponse(response: Response): Promise<void>;
 
   /**
    *
    */
-  verifyLastResponse(): void;
+  verifyLastResponse(): Promise<void>;
 }
 
 export default Client;

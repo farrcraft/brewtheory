@@ -165,11 +165,10 @@ class App {
       app.quit();
       return;
     }
-    console.log('getting endpoint');
+
     // [FIXME] - should use constant of some kind of endpoint name here?
     const kex = <Kex>this.api.getEndpoint('kex');
     try {
-      console.log('attempting key exchange');
       await kex.keyExchange();
     } catch (err) {
       this.logger.error(`Key exchange failed ${err}`);
@@ -177,7 +176,6 @@ class App {
       app.quit();
     }
 
-    console.log('ipc main');
     // The bridge will make an IPC request for the backend's public key.
     // Without it, the renderer process won't be able to make backend RPC calls.
     ipcMain.on('verify-public-key', (event): void => {
