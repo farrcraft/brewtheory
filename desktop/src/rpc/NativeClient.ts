@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import * as https from 'https';
 import * as http from 'http';
+import { bytesToBase64 } from './base64';
 import Endpoint from './Endpoint';
 import Response from './Response';
 import Client from './Client';
@@ -61,7 +62,9 @@ class NativeClient extends Client {
     if (payload !== null) {
       const signature = this.createSignature(payload);
       options.headers['Message-Signature'] = signature;
-      requestBody = payload.toString();
+      options.headers['Content-Type'] = 'application/octet-stream';
+      // bas64 encode the payload so we don't have to worry about the protobuf wire format getting mangled during transit.
+      requestBody = bytesToBase64(payload);
     }
 
     const promise = new Promise<boolean>((resolve): void => {
