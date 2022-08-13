@@ -20,14 +20,14 @@ package rpc
 
 import (
 	"crypto/ed25519"
-	"encoding/base64"
+	"encoding/hex"
 )
 
 // CreateSignature creates a signature for a response body
 func (rpc *Server) CreateSignature(response []byte, context *RequestContext) string {
 	signature := ed25519.Sign(context.Token.SignPrivateKey, response)
 
-	sig := base64.StdEncoding.EncodeToString(signature[:])
+	sig := hex.EncodeToString([]byte(signature))
 	return sig
 }
 
