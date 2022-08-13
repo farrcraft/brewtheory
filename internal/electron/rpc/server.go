@@ -73,7 +73,6 @@ func NewServer(logger *logrus.Logger, Status chan string, Shutdown chan bool) *S
 // VerifyHeaders checks that a request contains the correct headers &
 // extracts their values into a working structure
 func (rpc *Server) VerifyHeaders(req *http.Request, context *RequestContext) bool {
-
 	context.Header = &RequestHeader{}
 
 	context.Header.Method = req.Header.Get("Request-Method")
@@ -156,6 +155,7 @@ func (rpc *Server) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 	context := &RequestContext{}
 
 	if !rpc.VerifyHeaders(req, context) {
+		rpc.Logger.Warn("Failed verifying request headers")
 		return
 	}
 
@@ -165,7 +165,7 @@ func (rpc *Server) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	rpc.Logger.Debug(context.Header.Method)
+	rpc.Logger.Debug("HTTP request for RPC method [", context.Header.Method, "]")
 	if context.Header.Method == "SERVICE-READY" {
 		_, err = resp.Write([]byte("OK"))
 		rpc.Logger.Debug("ready!")
