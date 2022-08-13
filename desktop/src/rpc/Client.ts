@@ -111,11 +111,10 @@ class Client implements ClientInterface {
    *
    * @param payload The body of the request message
    */
-  async createSignature(payload: Uint8Array): Promise<string> {
-    // const signature = nacl.sign.detached(payload, this.signPrivateKey);
-    const signature = await ed.sign(payload, this.signPrivateKey);
-    const rebased = base64js.fromByteArray(signature);
-    return rebased;
+  async createSignature(payload: string): Promise<string> {
+    const rawSignature = await ed.sign(payload, this.signPrivateKey);
+    const signature = Buffer.from(rawSignature).toString('hex');
+    return signature;
   }
 
   /**

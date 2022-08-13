@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import * as https from 'https';
 import * as http from 'http';
-import { bytesToBase64 } from './base64';
+import * as ed from '@noble/ed25519';
 import Endpoint from './Endpoint';
 import Response from './Response';
 import Client from './Client';
@@ -60,11 +60,11 @@ class NativeClient extends Client {
     };
     let requestBody = '';
     if (payload !== null) {
-      const signature = await this.createSignature(payload);
+      // hex encode the payload so we don't have to worry about the protobuf wire format getting mangled during transit.
+      requestBody = ed.utils.bytesToHex(payload);
+      const signature = await this.createSignature(requestBody);
       options.headers['Message-Signature'] = signature;
       options.headers['Content-Type'] = 'application/octet-stream';
-      // bas64 encode the payload so we don't have to worry about the protobuf wire format getting mangled during transit.
-      requestBody = bytesToBase64(payload);
     }
 
     const promise = new Promise<boolean>((resolve): void => {
@@ -75,11 +75,9 @@ class NativeClient extends Client {
           const body: Array<string> = [];
           // response.statusCode
           response.on('data', (chunk) => {
-            // console.log('data');
             body.push(chunk);
           });
           response.on('end', () => {
-            // console.log('end');
             this.lastResponse = new Response();
             this.lastResponse.body = body.join('');
             this.lastResponse.headers = response.headers;
@@ -94,8 +92,6 @@ class NativeClient extends Client {
         }
       );
       req.on('error', (err) => {
-        // console.log('error in request');
-        // console.log(err);
         this.lastError = err;
         resolve(false);
       });

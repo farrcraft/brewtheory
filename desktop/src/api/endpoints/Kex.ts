@@ -37,7 +37,7 @@ class Kex extends Endpoint implements EndpointInterface {
   /**
    *
    */
-  keyExchange(): void {
+  async keyExchange(): Promise<void> {
     if (this.rpc === null) {
       throw new InternalError('Service Error', 'RPC Unavailable');
     }
@@ -48,7 +48,14 @@ class Kex extends Endpoint implements EndpointInterface {
     message.publicKey = this.rpc.client.signPublicKey;
 
     const payload = message.serializeBinary();
-    const response = this.rpc.request('KeyExchange', payload);
+    const responseBody = await this.rpc.request('KeyExchange', payload);
+
+    const responseMessage =
+      kexProto.brewtheory.KeyExchangeResponse.deserializeBinary(
+        Uint8Array.from(Buffer.from(responseBody, 'hex'))
+      );
+
+/*
     response
       .then((body) => {
         if (this.rpc === null) {
@@ -73,6 +80,7 @@ class Kex extends Endpoint implements EndpointInterface {
         return true;
       })
       .catch((err) => {});
+*/
   }
 }
 

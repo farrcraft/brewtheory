@@ -85,7 +85,7 @@ interface Client {
    *
    * @param payload
    */
-  createSignature(payload: Uint8Array): Promise<string>;
+  createSignature(payload: string): Promise<string>;
 
   /**
    *

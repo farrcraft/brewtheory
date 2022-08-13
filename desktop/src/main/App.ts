@@ -170,7 +170,7 @@ class App {
     const kex = <Kex>this.api.getEndpoint('kex');
     try {
       console.log('attempting key exchange');
-      kex.keyExchange();
+      await kex.keyExchange();
     } catch (err) {
       this.logger.error(`Key exchange failed ${err}`);
       // [FIXME] - shutdown
