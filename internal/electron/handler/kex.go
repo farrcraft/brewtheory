@@ -19,8 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package handler
 
 import (
-	"encoding/base64"
-
 	"google.golang.org/protobuf/proto"
 
 	"github.com/farrcraft/brewtheory/internal/electron/codes"
@@ -35,13 +33,7 @@ func KeyExchange(server *rpc.Server, message []byte, context *rpc.RequestContext
 	}
 
 	request := messages.KeyExchangeRequest{}
-	decodedMessage, err := base64.URLEncoding.DecodeString(string(message))
-	if err != nil {
-		server.Logger.Warn("Error decoding message - ", err)
-		rpc.SetRPCError(response.Header, codes.ErrorDecode)
-		return response, nil
-	}
-	err = proto.Unmarshal(decodedMessage, &request)
+	err := proto.Unmarshal(message, &request)
 	if err != nil {
 		server.Logger.Warn("Error unmarshaling message - ", err)
 		rpc.SetRPCError(response.Header, codes.ErrorDecode)

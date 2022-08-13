@@ -191,13 +191,19 @@ func (rpc *Server) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 		}
 	}
 
-	handlerResponse, err := handler(rpc, body, context)
+	decodedBody, err := base64.URLEncoding.DecodeString(string(body))
+	if err != nil {
+		rpc.Logger.Warn("Error decoding request body - ", err)
+		return
+	}
+
+	handlerResponse, err := handler(rpc, decodedBody, context)
 	if err != nil {
 		return
 	}
 
 	if context.Header.Method == "KeyExchange" {
-		ok := rpc.VerifyRequest(body, context.Header.Signature, context)
+		ok := rpc.VerifyRequest(decodedBody, context.Header.Signature, context)
 		if !ok {
 			rpc.Logger.Warn("Message Verification failed")
 			return
