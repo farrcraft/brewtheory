@@ -37,6 +37,10 @@ func (rpc *Server) VerifyRequest(message []byte, sig []byte, context *RequestCon
 		rpc.Logger.Warn("Request context missing Token when verifying request")
 		return false
 	}
+	if len(context.Token.VerifyPublicKey) == 0 {
+		rpc.Logger.Warn("Verification key is missing")
+		return false
+	}
 	ok := ed25519.Verify(context.Token.VerifyPublicKey, message, sig)
 	if !ok {
 		rpc.Logger.Warn("Request payload signature could not be verified. key [", context.Token.VerifyPublicKey[:], "] message [", message, "] signature")
