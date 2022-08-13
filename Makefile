@@ -11,20 +11,18 @@ build-all:
 # install the protoc golang plugin
 # See: https://developers.google.com/protocol-buffers/docs/gotutorial#compiling-your-protocol-buffers
 proto-gen:
-	go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+	go install google.golang.org/protobuf/cmd/protoc-gen-go@latest; \
+	npm install -g protoc-gen-ts
 
 # rebuild the proto definitions
 # The protoc tool is sourced from: https://github.com/protocolbuffers/protobuf/releases
 proto:
-	PATH=$$PATH:$$GOPATH/bin ./third_party/protoc/win64/bin/protoc internal/electron/proto/*.proto -Iinternal/electron/proto --go_out=.
+	PATH=$$PATH:$$GOPATH/bin ./third_party/protoc/win64/bin/protoc proto/*.proto -Iproto --go_out=.
 
-proto-js:
-	PATH=$$PATH:./third_party/protoc/win64/bin/ protoc.exe internal/electron/proto/*.proto -Iinternal/electron/proto --js_out=import_style=commonjs_strict,binary:desktop/src/proto --plugin=protoc-gen-js.exe
-
-# For this to work, need to have global node modules in path (see output of: `npm config get prefix`) and install `npm install -g protoc-gen-ts`
+# For this to work, need to have global node modules in path (see output of: `npm config get prefix`)
 # See: https://github.com/thesayyn/protoc-gen-ts
 proto-ts:
-	PATH=$$PATH:./third_party/protoc/win64/bin/ protoc.exe internal/electron/proto/*.proto -Iinternal/electron/proto
+	PATH=$$PATH:./third_party/protoc/win64/bin/ protoc.exe proto/*.proto -Iproto --ts_out=desktop/src/proto
 
 proto-all: proto proto-js
 
