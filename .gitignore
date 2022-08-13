@@ -1,3 +1,4 @@
 *.log
 *.exe
 .vscode/
+!third_party/protoc/win64/bin/*
