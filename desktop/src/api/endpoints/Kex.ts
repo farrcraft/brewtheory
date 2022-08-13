@@ -19,7 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import Endpoint from '../Endpoint';
 import EndpointInterface from '../../interfaces/api/Endpoint';
 import InternalError from '../../core/InternalError';
-import messagesKex from '../../proto/kex_pb';
+import * as commonProto from '../../proto/common';
+import * as kexProto from '../../proto/kex';
 
 /**
  *
@@ -40,31 +41,38 @@ class Kex extends Endpoint implements EndpointInterface {
     if (this.rpc === null) {
       throw new InternalError('Service Error', 'RPC Unavailable');
     }
-    const message = new messagesKex.brewtheory.KeyExchangeRequest();
-    message.setPublickey(this.rpc.client.signPublicKey);
+    const message = new kexProto.brewtheory.KeyExchangeRequest();
+    const messageHeader = new commonProto.brewtheory.RequestHeader();
+    messageHeader.method = 'keyExchange';
+    message.header = messageHeader;
+    message.publicKey = this.rpc.client.signPublicKey;
+
     const payload = message.serializeBinary();
-
     const response = this.rpc.request('KeyExchange', payload);
-    response.then((body) => {
-      if (this.rpc === null) {
-        throw new InternalError('Service Error', 'RPC Unavailable');
-      }
-      const responseMessage = messagesKex.brewtheory.KeyExchangeResponse.deserializeBinary(
-        this.rpc.str2ab(body)
-      );
+    response
+      .then((body) => {
+        if (this.rpc === null) {
+          throw new InternalError('Service Error', 'RPC Unavailable');
+        }
+        const responseMessage =
+          kexProto.brewtheory.KeyExchangeResponse.deserializeBinary(
+            this.rpc.str2ab(body)
+          );
 
-      let key = responseMessage.getPublickey();
-      if (typeof key === 'string') {
-        // [FIXME] - need a better place for this method to live (it's in Request too)
-        key = this.rpc.str2ab(key);
-      }
-      this.rpc.client.verifyPublicKey = key;
-      this.rpc.client.clientToken = responseMessage.getToken();
+        let key = responseMessage.getPublickey();
+        if (typeof key === 'string') {
+          // [FIXME] - need a better place for this method to live (it's in Request too)
+          key = this.rpc.str2ab(key);
+        }
+        this.rpc.client.verifyPublicKey = key;
+        this.rpc.client.clientToken = responseMessage.getToken();
 
-      // responses would normally be verified directly by the rpc call, but it has to
-      // be deferred in the case of key exchange - this throws on verification failure
-      this.rpc.client.verifyLastResponse();
-    });
+        // responses would normally be verified directly by the rpc call, but it has to
+        // be deferred in the case of key exchange - this throws on verification failure
+        this.rpc.client.verifyLastResponse();
+        return true;
+      })
+      .catch((err) => {});
   }
 }
 
