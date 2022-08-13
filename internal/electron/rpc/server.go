@@ -21,6 +21,7 @@ package rpc
 import (
 	"crypto/tls"
 	"encoding/base64"
+	"encoding/hex"
 	"io"
 	"log"
 	"net"
@@ -107,7 +108,7 @@ func (rpc *Server) VerifyHeaders(req *http.Request, context *RequestContext) boo
 		return false
 	}
 	var err error
-	context.Header.Signature, err = base64.StdEncoding.DecodeString(signature)
+	context.Header.Signature, err = hex.DecodeString(signature)
 	if err != nil {
 		rpc.Logger.Warn("Error decoding request signature - ", err)
 		return false
@@ -181,20 +182,20 @@ func (rpc *Server) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+	decodedBody, err := hex.DecodeString(string(body))
+	if err != nil {
+		rpc.Logger.Warn("Error decoding request body - ", err)
+		return
+	}
+
 	// key exchange requests contain the key needed to do verification
 	// so we need to defer until after the request has been handled
 	if context.Header.Method != "KeyExchange" {
-		ok := rpc.VerifyRequest(body, context.Header.Signature, context)
+		ok := rpc.VerifyRequest(decodedBody, context.Header.Signature, context)
 		if !ok {
 			rpc.Logger.Warn("Message Verification failed")
 			return
 		}
-	}
-
-	decodedBody, err := base64.URLEncoding.DecodeString(string(body))
-	if err != nil {
-		rpc.Logger.Warn("Error decoding request body - ", err)
-		return
 	}
 
 	handlerResponse, err := handler(rpc, decodedBody, context)

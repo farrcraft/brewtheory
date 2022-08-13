@@ -43,7 +43,7 @@ func (rpc *Server) VerifyRequest(message []byte, sig []byte, context *RequestCon
 	}
 	ok := ed25519.Verify(context.Token.VerifyPublicKey, message, sig)
 	if !ok {
-		rpc.Logger.Warn("Request payload signature could not be verified. key [", context.Token.VerifyPublicKey[:], "] message [", message, "] signature")
+		rpc.Logger.Warn("Request payload could not be verified")
 		return false
 	}
 	return true

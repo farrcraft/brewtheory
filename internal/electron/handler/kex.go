@@ -52,7 +52,6 @@ func KeyExchange(server *rpc.Server, message []byte, context *rpc.RequestContext
 	// this is a bit weak sauce wrt security since signature & verification key
 	// are contained in the same message body, but it does give us assurance
 	// that we at least have a functional verification key.
-	// context.Token.VerifyPublicKey = new([ed25519.PublicKeySize]byte)
 	context.Token.VerifyPublicKey = make([]byte, len(request.PublicKey))
 	copy(context.Token.VerifyPublicKey, request.PublicKey)
 
