@@ -37,7 +37,7 @@ export default function ListItemLink(props: ListItemLinkProps) {
 
   const renderLink = React.useMemo(
     () =>
-      // eslint-disable-next-line prettier/prettier
+      // eslint-disable-next-line prettier/prettier, react/no-unstable-nested-components
       React.forwardRef<HTMLAnchorElement, Omit<RouterLinkProps, 'to'>>(function Link(
         itemProps, ref,
       ) {

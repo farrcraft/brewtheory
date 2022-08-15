@@ -131,7 +131,7 @@ class App {
     // The backend is only guaranteed to be in its initial service ready state
     // where its at least created the SSL certificate, but might not yet be
     // ready to service RPC requests.
-    let ok = this.rpc.waitForReady(this.onBackendReady);
+    const ok = this.rpc.waitForReady(this.onBackendReady);
   }
 
   /**
@@ -141,8 +141,8 @@ class App {
     const installExtensions = async (): Promise<void> => {
       if (process.env.NODE_ENV === 'development') {
         return installExtension([REACT_DEVELOPER_TOOLS.id])
-          .then((name) => console.log(`Added Extension:  ${name}`))
-          .catch((err) => console.log('An error occurred: ', err));
+          .then((name) => this.logger.debug(`Added Extension:  ${name}`))
+          .catch((err) => this.logger.error(`An error occurred: ${err}`));
       }
     };
 
@@ -175,13 +175,13 @@ class App {
       // [FIXME] - shutdown
       app.quit();
     }
-
+/*
     // The bridge will make an IPC request for the backend's public key.
     // Without it, the renderer process won't be able to make backend RPC calls.
     ipcMain.on('verify-public-key', (event): void => {
       event.returnValue = this.rpc.client.verifyPublicKey;
     });
-
+*/
     // create the window
     this.window.create(800, 600, 0, 0);
 

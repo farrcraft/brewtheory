@@ -74,7 +74,6 @@ export default class Rpc implements RpcInterface {
     for (let ticks = 10; ticks > 0; ticks -= 1) {
       // console.log('going to sleep');
       await this.sleep(1000).then(() => {
-        console.log('tick');
         ok = this.backendReady();
         if (ok === true) {
           return true;
@@ -92,26 +91,6 @@ export default class Rpc implements RpcInterface {
     // [FIXME] - we need to tell the client not to enforce strict ssl checks on this request
     const response = await this.client.request('SERVICE-READY', null);
     return response;
-    /*
-    response.then((result) => {
-console.log('response then ' + result);
-    }).catch((err) => {
-console.log('response caught ' + err.code);
-    });
-    const promise = new Promise<boolean>((resolve) => {
-      if (response === 'OK') {
-        resolve(true);
-      } else {
-        resolve(false);
-      }
-    }).catch((err) => {
-      if (err.code === 'ECANCELED') {
-console.log('CAUGHT CANCELED!');
-      }
-      return false;
-    });
-    return promise;
-    */
   }
 
   /**

@@ -30,12 +30,12 @@ class Client implements ClientInterface {
   /**
    * The number of messages that have been received from the backend
    */
-  recvCounter: number = 0;
+  recvCounter = 0;
 
   /**
    * The number of messages sent to the backend
    */
-  sendCounter: number = 0;
+  sendCounter = 0;
 
   /**
    * The public key used for request message signing
