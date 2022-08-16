@@ -26,6 +26,7 @@ import {
   CSSObject,
 } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import MuiDrawer from '@mui/material/Drawer';
@@ -142,6 +143,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline enableColorScheme />
       <Box sx={{ display: 'flex' }}>
         <AppBar position="fixed" open={open}>
           <Toolbar>

@@ -18,7 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import { createRoot } from 'react-dom/client';
 import { HashRouter, Routes, Route } from 'react-router-dom';
-import CssBaseline from '@mui/material/CssBaseline';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -42,18 +41,15 @@ const container = document.getElementById('root');
 if (container !== null) {
   const root = createRoot(container);
   root.render(
-    <>
-      <CssBaseline enableColorScheme />
-      <HashRouter>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route path="recipes" element={<Recipes />} />
-            <Route path="brewhouse" element={<Brewhouse />} />
-            <Route path="tools" element={<Tools />} />
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
-      </HashRouter>
-    </>
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="recipes" element={<Recipes />} />
+          <Route path="brewhouse" element={<Brewhouse />} />
+          <Route path="tools" element={<Tools />} />
+          <Route index element={<Home />} />
+        </Route>
+      </Routes>
+    </HashRouter>
   );
 }
