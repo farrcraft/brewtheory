@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { app, ipcMain } from 'electron';
+import { app, ipcMain, session } from 'electron';
 import installExtension, {
   REACT_DEVELOPER_TOOLS,
 } from 'electron-devtools-installer';
@@ -30,6 +30,25 @@ import Logger from '../core/Logger';
 import Registrar from '../api/Registrar';
 import Rpc from '../rpc/Rpc';
 import Window from './Window';
+
+/**
+ * Security - Set CSP HTTP Header
+ */
+function setContentSecurityPolicy(): void {
+  if (session.defaultSession === undefined) {
+    return;
+  }
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,
+        'Content-Security-Policy': [
+          "default-src 'self'; style-src 'unsafe-inline'; font-src data:",
+        ],
+      },
+    });
+  });
+}
 
 class App {
   /**
@@ -144,9 +163,12 @@ class App {
           .then((name) => this.logger.debug(`Added Extension:  ${name}`))
           .catch((err) => this.logger.error(`An error occurred: ${err}`));
       }
+      return new Promise<void>(() => {});
     };
 
     await installExtensions();
+
+    setContentSecurityPolicy();
 
     try {
       this.certificate.load();
